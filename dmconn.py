@@ -7,7 +7,7 @@
 * @author Ефремов А. В., 30.10.2025
 """
 
-from typing import Optional
+from typing import Optional, Deque
 from socket import socket, AF_INET, SOCK_STREAM
 import errno
 from threading import Thread
@@ -24,7 +24,7 @@ class DMconn:
     sock: Optional[socket] = None
     th_keepalive: Optional[Thread] = None
     th_receive_data: Optional[Thread] = None
-    msg_buffer: deque[str] = deque(maxlen = 1000) # буфер для хранения последних 1000 ответов от сервера DMconnect
+    msg_buffer: Deque[str] = deque(maxlen = 1000) # буфер для хранения последних 1000 ответов от сервера DMconnect
 
     def __init__(self, host: str, port: int, user: str, password: str, join_server: str = "general"):
         if not "".__eq__(host) and 1 <= port <= 65534 and not "".__eq__(user) and not "".__eq__(password) and not "".__eq__(join_server):
